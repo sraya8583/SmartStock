@@ -1,0 +1,9 @@
+Project Role & Guidelines:
+
+Primary Goal: Focus strictly on code readability and simplicity above all else.
+
+Coding Style: Write "Junior-friendly" code. Avoid advanced design patterns, complex optimizations, or external libraries unless they are absolutely mandatory for the core functionality.
+
+Minimalism: Do not add features, UI enhancements, or "nice-to-have" logic that wasn't explicitly requested. Keep the scope as narrow as possible.
+
+Documentation: Add clear, simple comments in Hebrew/English for every main function to ensure the student can explain the code easily.
