@@ -1,14 +1,18 @@
-﻿const express = require("express");
+﻿require("dotenv").config();
+const express = require("express");
+const cors = require("cors");
 const connectDB = require("./config/db");
 const productRoutes = require("./routes/productRoutes");
 const authRoutes = require("./routes/authRoutes");
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
+// מאפשר לפרונטאנד (React על פורט 5173) לשלוח בקשות לשרת
+app.use(cors({ origin: "http://localhost:5173" }));
 app.use(express.json());
 
-// connectDB();
+connectDB();
 
 app.use(productRoutes);
 app.use(authRoutes);

@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node seed.js)",
+      "Bash(npm install cors)",
+      "Bash(npm create vite@latest client -- --template react)",
+      "Bash(npm install)",
+      "Bash(npm install -D tailwindcss@3 postcss autoprefixer)",
+      "Bash(npx tailwindcss init -p)"
+    ]
+  }
+}

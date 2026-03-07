@@ -1,4 +1,4 @@
-﻿const express = require("express");
+const express = require("express");
 const {
   getProducts,
   createProduct,
@@ -8,9 +8,9 @@ const {
 
 const router = express.Router();
 
-router.get("/products", getProducts);
-router.post("/products", createProduct);
-router.put("/products/:id", updateProduct);
-router.delete("/products/:id", deleteProduct);
+router.post("/api/products", createProduct);
+router.patch("/api/products/:id", updateProduct);
+router.get("/api/products", getProducts);
+router.delete("/api/products/:id", deleteProduct);
 
 module.exports = router;

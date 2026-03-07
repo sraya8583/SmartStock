@@ -1,4 +1,4 @@
-﻿const Product = require("../models/Product");
+const Product = require("../models/Product");
 
 const getProducts = async (req, res) => {
   try {
@@ -20,12 +20,22 @@ const createProduct = async (req, res) => {
 
 const updateProduct = async (req, res) => {
   try {
-    const updatedProduct = await Product.findByIdAndUpdate(req.params.id, req.body, {
+    const updates = {
+      ...req.body,
+      updatedAt: Date.now(),
+    };
+
+    const updatedProduct = await Product.findByIdAndUpdate(req.params.id, updates, {
       new: true,
+      runValidators: true,
     });
 
     if (!updatedProduct) {
       return res.status(404).json({ message: "Product not found" });
+    }
+
+    if (updatedProduct.quantity < updatedProduct.minThreshold) {
+      console.log("Low stock alert");
     }
 
     res.status(200).json(updatedProduct);
