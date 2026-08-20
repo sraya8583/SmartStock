@@ -1,8 +1,9 @@
 import { useState } from "react";
-import useProducts from "../hooks/useProducts";
+import useProducts from "../../hooks/useProducts";
 import ProductTable from "./ProductTable";
 import AddProductModal from "./AddProductModal";
 import EditProductModal from "./EditProductModal";
+import "./css/ProductsPage.css";
 
 // דף ראשי של ניהול המלאי
 // אחראי על: הצגת הטבלה, פתיחת מודאלים, מחיקת מוצרים
@@ -28,24 +29,21 @@ function ProductsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
+    <div className="page-container">
       {/* כותרת ראשית */}
-      <div className="max-w-6xl mx-auto">
-        <div className="flex items-center justify-between mb-6">
-          <h1 className="text-2xl font-bold text-gray-800">ניהול מלאי - SmartStock</h1>
-          <button
-            onClick={() => setShowAdd(true)}
-            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-          >
+      <div className="page-content">
+        <div className="page-header">
+          <h1>ניהול מלאי - SmartStock</h1>
+          <button onClick={() => setShowAdd(true)} className="add-button">
             + הוסף מוצר
           </button>
         </div>
 
         {/* מצב טעינה */}
-        {isLoading && <p className="text-gray-500">טוען מוצרים...</p>}
+        {isLoading && <p className="loading-text">טוען מוצרים...</p>}
 
         {/* מצב שגיאה */}
-        {error && <p className="text-red-600">שגיאה: {error}</p>}
+        {error && <p className="error-text">שגיאה: {error}</p>}
 
         {/* טבלת המוצרים */}
         {!isLoading && !error && (

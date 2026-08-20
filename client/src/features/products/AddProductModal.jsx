@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./css/ProductModal.css";
 
 // מודאל להוספת מוצר חדש
 // props: onClose (סגור בלי שמירה), onSaved (נשמר בהצלחה)
@@ -37,18 +38,17 @@ function AddProductModal({ onClose, onSaved }) {
 
   return (
     // רקע כהה מאחורי המודאל
-    <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
-        <h2 className="text-lg font-bold text-gray-800 mb-4">הוספת מוצר חדש</h2>
+    <div className="modal-overlay">
+      <div className="modal-box">
+        <h2>הוספת מוצר חדש</h2>
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+        <form onSubmit={handleSubmit}>
           <input
             name="name"
             placeholder="שם המוצר"
             value={form.name}
             onChange={handleChange}
             required
-            className="border rounded px-3 py-2 text-sm"
           />
           <input
             name="category"
@@ -56,7 +56,6 @@ function AddProductModal({ onClose, onSaved }) {
             value={form.category}
             onChange={handleChange}
             required
-            className="border rounded px-3 py-2 text-sm"
           />
           <input
             name="quantity"
@@ -65,7 +64,6 @@ function AddProductModal({ onClose, onSaved }) {
             value={form.quantity}
             onChange={handleChange}
             required
-            className="border rounded px-3 py-2 text-sm"
           />
           <input
             name="minThreshold"
@@ -74,7 +72,6 @@ function AddProductModal({ onClose, onSaved }) {
             value={form.minThreshold}
             onChange={handleChange}
             required
-            className="border rounded px-3 py-2 text-sm"
           />
           <input
             name="price"
@@ -83,21 +80,13 @@ function AddProductModal({ onClose, onSaved }) {
             placeholder="מחיר"
             value={form.price}
             onChange={handleChange}
-            className="border rounded px-3 py-2 text-sm"
           />
 
-          <div className="flex gap-2 mt-2">
-            <button
-              type="submit"
-              className="flex-1 bg-blue-600 text-white py-2 rounded hover:bg-blue-700 text-sm"
-            >
+          <div className="button-row">
+            <button type="submit" className="submit-button">
               הוסף
             </button>
-            <button
-              type="button"
-              onClick={onClose}
-              className="flex-1 bg-gray-200 text-gray-700 py-2 rounded hover:bg-gray-300 text-sm"
-            >
+            <button type="button" onClick={onClose} className="cancel-button">
               ביטול
             </button>
           </div>
