@@ -1,0 +1,64 @@
+/* עיצוב לדפי Login ו-Signup */
+
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f9fafb;
+  padding: 1.5rem;
+}
+
+.auth-form {
+  width: 100%;
+  max-width: 24rem;
+  background-color: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.auth-form__title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1f2937;
+  text-align: center;
+  margin: 0;
+}
+
+.auth-form__error {
+  color: #dc2626;
+  font-size: 0.875rem;
+  text-align: center;
+  margin: 0;
+}
+
+.auth-form__label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+  color: #374151;
+}
+
+.auth-form__label input {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+}
+
+.auth-form__label input:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+.auth-form__link {
+  text-align: center;
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin: 0;
+}

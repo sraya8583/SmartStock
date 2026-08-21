@@ -1,0 +1,74 @@
+/* עיצוב לקובץ Button */
+
+.btn {
+  border-radius: 0.25rem;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease, opacity 0.15s ease;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* גדלים */
+.btn-sm {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+}
+
+.btn-md {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+}
+
+/* סגנונות צבע */
+.btn-primary {
+  background-color: #2563eb;
+  color: #fff;
+}
+.btn-primary:hover:not(:disabled) {
+  background-color: #1d4ed8;
+}
+
+.btn-secondary {
+  background-color: #e5e7eb;
+  color: #374151;
+}
+.btn-secondary:hover:not(:disabled) {
+  background-color: #d1d5db;
+}
+
+.btn-success {
+  background-color: #16a34a;
+  color: #fff;
+}
+.btn-success:hover:not(:disabled) {
+  background-color: #15803d;
+}
+
+.btn-danger {
+  background-color: #dc2626;
+  color: #fff;
+}
+.btn-danger:hover:not(:disabled) {
+  background-color: #b91c1c;
+}
+
+.btn-neutral {
+  background-color: #4b5563;
+  color: #fff;
+}
+.btn-neutral:hover:not(:disabled) {
+  background-color: #374151;
+}
+
+.btn-text {
+  background-color: transparent;
+  padding: 0 !important;
+}
+.btn-text:hover:not(:disabled) {
+  text-decoration: underline;
+}
