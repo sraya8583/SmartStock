@@ -68,6 +68,7 @@ function AllMovementsModal({ products, onClose }) {
                   <th>סוג</th>
                   <th>כמות</th>
                   <th>יתרה אחרי</th>
+                  <th>בוצע על ידי</th>
                   <th>הערה</th>
                 </tr>
               </thead>
@@ -93,6 +94,7 @@ function AllMovementsModal({ products, onClose }) {
                       {movement.quantity > 0 ? `+${movement.quantity}` : movement.quantity}
                     </td>
                     <td className="movement-table__balance">{movement.resultingBalance}</td>
+                    <td className="movement-table__performed-by">{movement.performedBy?.email ?? "—"}</td>
                     <td className="movement-table__note">{movement.note || "—"}</td>
                   </tr>
                 ))}

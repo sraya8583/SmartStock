@@ -9,6 +9,12 @@ const stockMovementSchema = new mongoose.Schema({
     required: true,
     index: true,
   },
+  // היוזר שביצע את התנועה - לצורך מעקב "מי עשה מה" בהיסטוריה
+  performedBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
   type: {
     type: String,
     enum: ["sale", "return", "restock", "adjustment"],

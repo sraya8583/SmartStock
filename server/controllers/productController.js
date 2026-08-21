@@ -67,7 +67,7 @@ const deleteProduct = async (req, res) => {
 // הפונקציה המרכזית של המערכת: רושמת תנועת מלאי ומעדכנת את currentStock
 // באותה טרנזקציה - או ששתי הכתיבות מצליחות יחד, או ששתיהן מתבטלות יחד.
 // זה מונע מצב שבו יש תנועה רשומה אבל המלאי לא התעדכן (ולהפך).
-const recordStockMovement = async (productId, type, quantityChange, note) => {
+const recordStockMovement = async (productId, type, quantityChange, note, performedBy) => {
   const session = await mongoose.startSession();
 
   try {
@@ -89,6 +89,7 @@ const recordStockMovement = async (productId, type, quantityChange, note) => {
         [
           {
             productId,
+            performedBy,
             type,
             quantity: quantityChange,
             resultingBalance: newBalance,
@@ -121,7 +122,13 @@ const createMovement = async (req, res) => {
   try {
     const { type, quantity, note } = req.body;
 
-    const updatedProduct = await recordStockMovement(req.params.id, type, quantity, note);
+    const updatedProduct = await recordStockMovement(
+      req.params.id,
+      type,
+      quantity,
+      note,
+      req.user.id
+    );
     res.status(201).json(updatedProduct);
   } catch (error) {
     if (error.message === "המוצר לא נמצא") {
@@ -138,7 +145,9 @@ const createMovement = async (req, res) => {
 // מחזירה את היסטוריית תנועות המלאי של מוצר, מהחדש לישן
 const getMovements = async (req, res) => {
   try {
-    const movements = await StockMovement.find({ productId: req.params.id }).sort({ date: -1 });
+    const movements = await StockMovement.find({ productId: req.params.id })
+      .sort({ date: -1 })
+      .populate("performedBy", "email");
     res.status(200).json(movements);
   } catch (error) {
     res.status(500).json({ message: "Failed to fetch stock movements" });
@@ -152,7 +161,8 @@ const getAllMovements = async (req, res) => {
   try {
     const movements = await StockMovement.find()
       .sort({ date: -1 })
-      .populate("productId", "name sku");
+      .populate("productId", "name sku")
+      .populate("performedBy", "email");
 
     res.status(200).json(movements);
   } catch (error) {
