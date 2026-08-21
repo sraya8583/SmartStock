@@ -6,16 +6,26 @@ const productSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
+  sku: {
+    type: String,
+    required: true,
+    unique: true,
+    trim: true,
+  },
   category: {
     type: String,
     required: true,
     trim: true,
   },
-  quantity: {
+  // מלאי נוכחי - שדה "מהיר לקריאה" בשביל הפרונטאנד.
+  // מתעדכן ישירות ואטומית יחד עם כתיבת StockMovement (ראה recordStockMovement),
+  // ולעולם לא מחושב מחדש ע"י שאילתה/מיון של תנועות המלאי.
+  currentStock: {
     type: Number,
+    required: true,
     default: 0,
   },
-  minThreshold: {
+  lowStockThreshold: {
     type: Number,
     default: 5,
   },

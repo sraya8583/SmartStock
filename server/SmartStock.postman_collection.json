@@ -64,11 +64,12 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "{{baseUrl}}/products",
+          "raw": "{{baseUrl}}/api/products",
           "host": [
             "{{baseUrl}}"
           ],
           "path": [
+            "api",
             "products"
           ]
         }
@@ -86,14 +87,15 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"name\": \"Milk\",\n  \"quantity\": 20,\n  \"price\": 6.5,\n  \"minQuantity\": 5\n}"
+          "raw": "{\n  \"name\": \"Milk\",\n  \"sku\": \"MILK-001\",\n  \"category\": \"Dairy\",\n  \"currentStock\": 20,\n  \"price\": 6.5,\n  \"lowStockThreshold\": 5\n}"
         },
         "url": {
-          "raw": "{{baseUrl}}/products",
+          "raw": "{{baseUrl}}/api/products",
           "host": [
             "{{baseUrl}}"
           ],
           "path": [
+            "api",
             "products"
           ]
         }
@@ -111,14 +113,15 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"name\": \"Milk 3%\",\n  \"quantity\": 15,\n  \"price\": 7,\n  \"minQuantity\": 4\n}"
+          "raw": "{\n  \"name\": \"Milk 3%\",\n  \"price\": 7,\n  \"lowStockThreshold\": 4\n}"
         },
         "url": {
-          "raw": "{{baseUrl}}/products/{{productId}}",
+          "raw": "{{baseUrl}}/api/products/{{productId}}",
           "host": [
             "{{baseUrl}}"
           ],
           "path": [
+            "api",
             "products",
             "{{productId}}"
           ]
@@ -131,13 +134,80 @@
         "method": "DELETE",
         "header": [],
         "url": {
-          "raw": "{{baseUrl}}/products/{{productId}}",
+          "raw": "{{baseUrl}}/api/products/{{productId}}",
           "host": [
             "{{baseUrl}}"
           ],
           "path": [
+            "api",
             "products",
             "{{productId}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Products - Record Movement",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"type\": \"restock\",\n  \"quantity\": 10,\n  \"note\": \"Weekly delivery\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/products/{{productId}}/movement",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "products",
+            "{{productId}}",
+            "movement"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Products - Get Movements",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/products/{{productId}}/movements",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "products",
+            "{{productId}}",
+            "movements"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Products - Reconcile",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/products/{{productId}}/reconcile",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "products",
+            "{{productId}}",
+            "reconcile"
           ]
         }
       }
