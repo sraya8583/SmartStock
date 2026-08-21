@@ -42,6 +42,10 @@ function UserProfileModal({ onClose }) {
         {profile && (
           <div className="user-profile__details">
             <div className="user-profile__row">
+              <span className="user-profile__label">שם משתמש</span>
+              <span className="user-profile__value">{profile.username}</span>
+            </div>
+            <div className="user-profile__row">
               <span className="user-profile__label">אימייל</span>
               <span className="user-profile__value">{profile.email}</span>
             </div>

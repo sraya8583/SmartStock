@@ -34,15 +34,13 @@ export async function loginUser(credentials) {
   return response.json();
 }
 
-// שליפת פרטי המשתמש המחובר (מייל + תאריך הרשמה)
+// שליפת פרטי המשתמש המחובר (מייל + תאריך הרשמה + שם משתמש)
 export async function fetchProfile() {
   const response = await fetch(`${API_URL}/me`, { headers: getAuthHeaders() });
-
   if (!response.ok) {
     const data = await response.json().catch(() => ({}));
     throw new Error(data.message || "שליפת פרטי המשתמש נכשלה");
   }
-
   return response.json();
 }
 

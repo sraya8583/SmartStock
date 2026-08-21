@@ -28,11 +28,11 @@ const register = async (req, res) => {
       return res.status(400).json({ message: "משתמש עם אימייל זה כבר קיים" });
     }
 
-    // המשתמש i0548542122@gmail.com הוא בעל הפרויקט - נרשם כ-admin, כל השאר כ-user רגיל
+    // המשתמש i0548542122@gmail.com הוא בעלco הפרויקט - נרשם כ-admin, כל השאר כ-user רגיל
     const role = email === "i0548542122@gmail.com" ? "admin" : "user";
 
     const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
-    const newUser = await User.create({ email, password: hashedPassword, role });
+    const newUser = await User.create({ email, password: hashedPassword, role, username: req.body.username });
 
     const token = generateToken(newUser);
     res.status(201).json({ token });
@@ -72,7 +72,7 @@ const getMe = async (req, res) => {
       return res.status(404).json({ message: "משתמש לא נמצא" });
     }
 
-    res.status(200).json({ email: user.email, createdAt: user.createdAt });
+    res.status(200).json({ email: user.email, createdAt: user.createdAt, username: user.username });
   } catch (error) {
     res.status(500).json({ message: "שליפת פרטי המשתמש נכשלה" });
   }

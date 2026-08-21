@@ -7,6 +7,7 @@ import "./css/Auth.css";
 
 // דף הרשמה - יצירת משתמש חדש עם email + password. בהצלחה שומר טוקן ועובר לדף הבית
 function Signup() {
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -23,7 +24,7 @@ function Signup() {
       return;
     }
 
-    const success = await signup({ email, password });
+    const success = await signup({ email, password, username });
     if (success) {
       navigate("/");
     }
@@ -38,6 +39,15 @@ function Signup() {
           <p className="auth-form__error">{formError || error}</p>
         )}
 
+        <label className="auth-form__label">
+          שם משתמש
+          <input
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+        </label>
         <label className="auth-form__label">
           אימייל
           <input

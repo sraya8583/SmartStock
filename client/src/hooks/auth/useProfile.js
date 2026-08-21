@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchProfile } from "../../services/auth/authApi";
 
-// Hook שאחראי על שליפת פרטי המשתמש המחובר (מייל + תאריך הרשמה)
+// Hook שאחראי על שליפת פרטי המשתמש המחובר (מייל + תאריך הרשמה + שם משתמש)
 // מחזיר: profile, isLoading, error
 function useProfile() {
   const [profile, setProfile] = useState(null);
