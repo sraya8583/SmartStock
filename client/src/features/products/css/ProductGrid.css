@@ -1,0 +1,11 @@
+/* עיצוב לקובץ ProductGrid */
+
+.product-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.product-grid__empty {
+  color: #6b7280;
+}

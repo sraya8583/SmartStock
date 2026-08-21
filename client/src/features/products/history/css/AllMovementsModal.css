@@ -1,0 +1,143 @@
+/* עיצוב לקובץ AllMovementsModal */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.modal-box--all-movements {
+  background-color: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 48rem;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 1rem;
+}
+
+/* תגיות סינון לפי מוצר */
+.filter-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.filter-tag {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  border: 1px solid #d1d5db;
+  background-color: #fff;
+  color: #4b5563;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.filter-tag:hover {
+  background-color: #88bcf0;
+}
+
+.filter-tag--selected {
+  background-color: #2563eb;
+  color: #fff;
+  border-color: #2563eb;
+}
+
+.loading-message {
+  color: #6b7280;
+}
+
+.error-message {
+  color: #dc2626;
+}
+
+.empty-message {
+  color: #6b7280;
+}
+
+.movement-table-wrapper {
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+.movement-table {
+  width: 100%;
+  font-size: 0.875rem;
+  text-align: right;
+}
+
+.movement-table thead {
+  background-color: #f3f4f6;
+  color: #4b5563;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  position: sticky;
+  top: 0;
+}
+
+.movement-table th,
+.movement-table td {
+  padding: 0.5rem 0.75rem;
+}
+
+.movement-table tbody tr {
+  border-top: 1px solid #e5e7eb;
+}
+
+.movement-table__date {
+  color: #6b7280;
+  white-space: nowrap;
+}
+
+.movement-table__product {
+  color: #1f2937;
+  white-space: nowrap;
+}
+
+.movement-table__product-sku {
+  color: #9ca3af;
+}
+
+.movement-table__type {
+  color: #374151;
+  white-space: nowrap;
+}
+
+.movement-table__quantity {
+  font-weight: 500;
+}
+
+.movement-table__quantity--negative {
+  color: #dc2626;
+}
+
+.movement-table__quantity--positive {
+  color: #16a34a;
+}
+
+.movement-table__balance {
+  color: #1f2937;
+}
+
+.movement-table__note {
+  color: #6b7280;
+}
+
+.modal-close-button {
+  margin-top: 1rem;
+}

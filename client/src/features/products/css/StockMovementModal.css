@@ -1,0 +1,98 @@
+/* עיצוב לקובץ StockMovementModal */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.modal-box {
+  background-color: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 28rem;
+}
+
+.modal-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 1rem;
+}
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.modal-input {
+  border: 1px solid #d1d5db;
+  border-radius: 0.25rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.modal-actions__button {
+  flex: 1;
+}
+
+/* מצב הצלחה אחרי עדכון מלאי */
+.stock-movement__success {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.stock-movement__success-message {
+  color: #16a34a;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* טאבים למעבר בין הכנסה ללקיחה */
+.stock-movement__tabs {
+  display: flex;
+  margin-bottom: 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.25rem;
+  overflow: hidden;
+  font-size: 0.875rem;
+}
+
+.stock-movement__tab {
+  flex: 1;
+  padding: 0.5rem 0;
+  background-color: #f3f4f6;
+  color: #4b5563;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.stock-movement__tab--active-in {
+  background-color: #16a34a;
+  color: #fff;
+}
+
+.stock-movement__tab--active-out {
+  background-color: #dc2626;
+  color: #fff;
+}
+
+.stock-movement__error {
+  color: #dc2626;
+  font-size: 0.75rem;
+}

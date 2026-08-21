@@ -1,43 +1,55 @@
-.page-container {
+/* עיצוב לקובץ ProductsPage */
+
+.products-page {
   min-height: 100vh;
-  padding: 24px;
+  background-color: #f9fafb;
+  padding: 1.5rem;
 }
 
-.page-content {
-  max-width: 1152px;
+.products-page__container {
+  max-width: 72rem;
   margin: 0 auto;
 }
 
-.page-header {
+.products-page__header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 24px;
+  margin-bottom: 1.5rem;
 }
 
-.page-header h1 {
-  font-size: 24px;
-  font-weight: bold;
+.products-page__title {
+  font-size: 1.5rem;
+  font-weight: 700;
   color: #1f2937;
 }
 
-.add-button {
-  background-color: #2563eb;
-  color: white;
-  padding: 8px 16px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+.products-page__actions {
+  display: flex;
+  gap: 0.5rem;
 }
 
-.add-button:hover {
-  background-color: #1d4ed8;
-}
-
-.loading-text {
+.products-page__loading {
   color: #6b7280;
 }
 
-.error-text {
+.products-page__error {
   color: #dc2626;
+}
+
+.user-icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 9999px;
+  border: 1px solid #d1d5db;
+  background-color: #fff;
+  color: #4b5563;
+  cursor: pointer;
+}
+
+.user-icon-btn:hover {
+  background-color: #f3f4f6;
 }

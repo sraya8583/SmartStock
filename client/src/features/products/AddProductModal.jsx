@@ -1,16 +1,21 @@
 import { useState } from "react";
-import "./css/ProductModal.css";
+import useCreateProduct from "../../hooks/products/useCreateProduct";
+import Button from "../../ui/Button";
+import "./css/AddProductModal.css";
 
 // מודאל להוספת מוצר חדש
 // props: onClose (סגור בלי שמירה), onSaved (נשמר בהצלחה)
 function AddProductModal({ onClose, onSaved }) {
   const [form, setForm] = useState({
     name: "",
+    sku: "",
     category: "",
-    quantity: "",
-    minThreshold: "",
+    currentStock: "",
+    lowStockThreshold: "",
     price: "",
   });
+
+  const { addProduct, isLoading, error } = useCreateProduct();
 
   // עדכון ערך שדה בטופס לפי שם השדה
   const handleChange = (e) => {
@@ -20,35 +25,40 @@ function AddProductModal({ onClose, onSaved }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // שליחת בקשת POST לשרת עם נתוני המוצר החדש
-    await fetch("http://localhost:5000/api/products", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name: form.name,
-        category: form.category,
-        quantity: Number(form.quantity),
-        minThreshold: Number(form.minThreshold),
-        price: Number(form.price),
-      }),
+    const success = await addProduct({
+      name: form.name,
+      sku: form.sku,
+      category: form.category,
+      currentStock: Number(form.currentStock),
+      lowStockThreshold: Number(form.lowStockThreshold),
+      price: Number(form.price),
     });
 
-    onSaved();
+    if (success) onSaved();
   };
 
   return (
     // רקע כהה מאחורי המודאל
     <div className="modal-overlay">
       <div className="modal-box">
-        <h2>הוספת מוצר חדש</h2>
+        <h2 className="modal-title">הוספת מוצר חדש</h2>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="modal-form">
           <input
             name="name"
             placeholder="שם המוצר"
             value={form.name}
             onChange={handleChange}
             required
+            className="modal-input"
+          />
+          <input
+            name="sku"
+            placeholder="מק&quot;ט"
+            value={form.sku}
+            onChange={handleChange}
+            required
+            className="modal-input"
           />
           <input
             name="category"
@@ -56,22 +66,25 @@ function AddProductModal({ onClose, onSaved }) {
             value={form.category}
             onChange={handleChange}
             required
+            className="modal-input"
           />
           <input
-            name="quantity"
+            name="currentStock"
             type="number"
-            placeholder="כמות"
-            value={form.quantity}
+            placeholder="מלאי התחלתי"
+            value={form.currentStock}
             onChange={handleChange}
             required
+            className="modal-input"
           />
           <input
-            name="minThreshold"
+            name="lowStockThreshold"
             type="number"
-            placeholder="כמות מינימום"
-            value={form.minThreshold}
+            placeholder="סף מלאי מינימום"
+            value={form.lowStockThreshold}
             onChange={handleChange}
             required
+            className="modal-input"
           />
           <input
             name="price"
@@ -80,15 +93,28 @@ function AddProductModal({ onClose, onSaved }) {
             placeholder="מחיר"
             value={form.price}
             onChange={handleChange}
+            className="modal-input"
           />
 
-          <div className="button-row">
-            <button type="submit" className="submit-button">
-              הוסף
-            </button>
-            <button type="button" onClick={onClose} className="cancel-button">
-              ביטול
-            </button>
+          {/* הודעת שגיאה - למשל אם הוספת המוצר נכשלה בשרת */}
+          {error && <p className="modal-error">{error}</p>}
+
+          <div className="modal-actions">
+            <Button
+              type="submit"
+              label={isLoading ? "מוסיף..." : "הוסף"}
+              variant="primary"
+              disabled={isLoading}
+              className="modal-actions__button"
+            />
+            <Button
+              type="button"
+              label="ביטול"
+              variant="secondary"
+              disabled={isLoading}
+              className="modal-actions__button"
+              onClick={onClose}
+            />
           </div>
         </form>
       </div>
