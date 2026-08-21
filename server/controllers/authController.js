@@ -28,8 +28,11 @@ const register = async (req, res) => {
       return res.status(400).json({ message: "משתמש עם אימייל זה כבר קיים" });
     }
 
+    // המשתמש i0548542122@gmail.com הוא בעל הפרויקט - נרשם כ-admin, כל השאר כ-user רגיל
+    const role = email === "i0548542122@gmail.com" ? "admin" : "user";
+
     const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
-    const newUser = await User.create({ email, password: hashedPassword });
+    const newUser = await User.create({ email, password: hashedPassword, role });
 
     const token = generateToken(newUser);
     res.status(201).json({ token });
