@@ -7,7 +7,7 @@ const SALT_ROUNDS = 10;
 // מייצרת טוקן (JWT) עבור משתמש - משמש גם ברישום וגם בהתחברות
 function generateToken(user) {
   return jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET, {
-    expiresIn: "7d",
+    expiresIn: "30d",
   });
 }
 
@@ -29,7 +29,7 @@ const register = async (req, res) => {
     }
 
     // המשתמש i0548542122@gmail.com הוא בעלco הפרויקט - נרשם כ-admin, כל השאר כ-user רגיל
-    const role = email === "i0548542122@gmail.com" ? "admin" : "user";
+    const role = email === "user";
 
     const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
     const newUser = await User.create({ email, password: hashedPassword, role, username: req.body.username });
@@ -72,7 +72,7 @@ const getMe = async (req, res) => {
       return res.status(404).json({ message: "משתמש לא נמצא" });
     }
 
-    res.status(200).json({ email: user.email, createdAt: user.createdAt, username: user.username });
+    res.status(200).json({ email: user.email, createdAt: user.createdAt, username: user.username, role: user.role });
   } catch (error) {
     res.status(500).json({ message: "שליפת פרטי המשתמש נכשלה" });
   }

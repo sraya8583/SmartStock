@@ -8,7 +8,7 @@ const getProducts = async (req, res) => {
     const products = await Product.find();
     res.status(200).json(products);
   } catch (error) {
-    res.status(500).json({ message: "Failed to fetch products" });
+    res.status(500).json({ message: "כישלון בFetchRequest מוצרים" });
   }
 };
 
@@ -18,7 +18,7 @@ const createProduct = async (req, res) => {
     const newProduct = await Product.create(req.body);
     res.status(201).json(newProduct);
   } catch (error) {
-    res.status(500).json({ message: "Failed to create product" });
+    res.status(500).json({ message: "כישלון ביצירת מוצר" });
   }
 };
 
@@ -40,12 +40,12 @@ const updateProduct = async (req, res) => {
     });
 
     if (!updatedProduct) {
-      return res.status(404).json({ message: "Product not found" });
+      return res.status(404).json({ message: "מוצר לא נמצא" });
     }
 
     res.status(200).json(updatedProduct);
   } catch (error) {
-    res.status(500).json({ message: "Failed to update product" });
+    res.status(500).json({ message: "כישלון בעדכון מוצר" });
   }
 };
 
@@ -55,12 +55,12 @@ const deleteProduct = async (req, res) => {
     const deletedProduct = await Product.findByIdAndDelete(req.params.id);
 
     if (!deletedProduct) {
-      return res.status(404).json({ message: "Product not found" });
+      return res.status(404).json({ message: "מוצר לא נמצא" });
     }
 
-    res.status(200).json({ message: "Product deleted" });
+    res.status(200).json({ message: "מוצר נמחק בהצלחה" });
   } catch (error) {
-    res.status(500).json({ message: "Failed to delete product" });
+    res.status(500).json({ message: "כישלון במחיקת מוצר" });
   }
 };
 
@@ -162,7 +162,7 @@ const getAllMovements = async (req, res) => {
     const movements = await StockMovement.find()
       .sort({ date: -1 })
       .populate("productId", "name sku")
-      .populate("performedBy", "email");
+      .populate("performedBy", "email username");
 
     res.status(200).json(movements);
   } catch (error) {

@@ -19,7 +19,6 @@ export async function fetchProductMovements(productId) {
 // שליפת היסטוריית תנועות מלאי של כל המוצרים יחד
 export async function fetchAllMovements() {
   const response = await fetch(MOVEMENTS_URL, { headers: getAuthHeaders() });
-
   if (!response.ok) {
     throw new Error("שגיאה בשליפת היסטוריית המלאי");
   }

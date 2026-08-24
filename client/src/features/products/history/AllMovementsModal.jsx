@@ -10,6 +10,7 @@ import "./css/AllMovementsModal.css";
 // props: products (מערך המוצרים - לבניית תגיות הסינון), onClose
 function AllMovementsModal({ products, onClose }) {
   const { data: movements, isLoading, error } = useAllMovements();
+console.log("movements: ",movements);
 
   // selectedProductIds - מזהי המוצרים שנבחרו לסינון. מערך ריק = מציגים הכל
   const [selectedProductIds, setSelectedProductIds] = useState([]);

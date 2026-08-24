@@ -77,9 +77,9 @@ function ProductsPage() {
         {!isLoading && !error && (
           <ProductGrid
             products={data}
-            onEdit={(product) => setProductToEdit(product)}
+            onEdit={setProductToEdit}
             onDelete={handleDelete}
-            onShowHistory={(product) => setProductForHistory(product)}
+            onShowHistory={setProductForHistory}
           />
         )}
       </div>

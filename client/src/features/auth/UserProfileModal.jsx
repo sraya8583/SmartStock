@@ -57,6 +57,12 @@ function UserProfileModal({ onClose }) {
                   : "לא ידוע"}
               </span>
             </div>
+            <div className="user-profile__row">
+              <span className="user-profile__label">תפקיד</span>
+              <span className="user-profile__value">
+                {profile.role === "admin" ? "מנהל" : "משתמש רגיל"}
+              </span>
+            </div>
           </div>
         )}
 
