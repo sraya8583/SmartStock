@@ -80,13 +80,6 @@
   white-space: nowrap;
 }
 
-.product-card__price {
-  color: #374151;
-  font-weight: 500;
-  width: 4rem;
-  text-align: center;
-}
-
 .product-card__date {
   font-size: 0.75rem;
   color: #9ca3af;

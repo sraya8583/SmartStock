@@ -12,7 +12,6 @@ function AddProductModal({ onClose, onSaved }) {
     category: "",
     currentStock: "",
     lowStockThreshold: "",
-    price: "",
   });
 
   const { addProduct, isLoading, error } = useCreateProduct();
@@ -31,7 +30,6 @@ function AddProductModal({ onClose, onSaved }) {
       category: form.category,
       currentStock: Number(form.currentStock),
       lowStockThreshold: Number(form.lowStockThreshold),
-      price: Number(form.price),
     });
 
     if (success) onSaved();
@@ -86,16 +84,6 @@ function AddProductModal({ onClose, onSaved }) {
             required
             className="modal-input"
           />
-          <input
-            name="price"
-            type="number"
-            step="0.01"
-            placeholder="מחיר"
-            value={form.price}
-            onChange={handleChange}
-            className="modal-input"
-          />
-
           {/* הודעת שגיאה - למשל אם הוספת המוצר נכשלה בשרת */}
           {error && <p className="modal-error">{error}</p>}
 

@@ -32,10 +32,6 @@ function ProductCard({ product, onEdit, onDelete, onShowHistory }) {
         <p className="product-card__threshold">סף: {product.lowStockThreshold}</p>
       </div>
 
-      <p className="product-card__price">
-        {product.price != null ? `₪${product.price}` : "—"}
-      </p>
-
       <p className="product-card__date">
         {new Date(product.updatedAt).toLocaleDateString("he-IL")}
       </p>
