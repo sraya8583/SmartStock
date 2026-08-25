@@ -48,27 +48,29 @@
 }
 
 .user-profile__details {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 0.75rem;
 }
 
 .user-profile__row {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid #f3f4f6;
+  display: contents;
 }
 
 .user-profile__label {
   color: #6b7280;
   font-size: 0.875rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #f3f4f6;
 }
 
 .user-profile__value {
   color: #1f2937;
   font-size: 0.875rem;
   font-weight: 500;
+  text-align: right;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #f3f4f6;
 }
 
 .user-profile__close {
