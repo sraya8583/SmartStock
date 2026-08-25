@@ -16,7 +16,7 @@
 
 6. **דיאגרמות:** לכל דיאגרמה - קודם תיאור טקסטואלי, ואז JSON מוכן להעתקה לכלי AI ליצירת תמונות (מינימלי, שחור-לבן, טקסט בעברית). לבדוק את התמונה שחוזרת בקפידה מול הקוד בפועל לפני אישור סופי.
 
-7. **בדיקת קובץ PDF/טקסט מיוצא:** ל-pdftotext יש בעיה עם חילוץ טקסט עברי מ-PDF-ים של Google Docs (גלישה/היעלמות תווים) - לא אמין לבדיקת תוכן טקסטואלי עברי, רק למבנה/עמודים. **לבדיקה ויזואלית אמיתית** - Poppler (כולל pdftoppm) הותקן במחשב הזה דרך `winget install --id oschwartz10612.Poppler` בנתיב `C:\Users\user\AppData\Local\Microsoft\WinGet\Packages\oschwartz10612.Poppler_Microsoft.Winget.Source_8wekyb3d8bbwe\poppler-25.07.0\Library\bin` - להשתמש ב-`pdftoppm.exe -png -r 100` כדי להמיר עמודים לתמונות ואז לקרוא אותן עם Read. גם `grep -a -o "/BaseFont */[A-Za-z0-9+_,.-]*"` על קובץ ה-PDF עוזר לבדוק אילו פונטים מוטבעים בפועל (למשל לגלות שרק חלק מהמסמך הומר לפונט הרצוי).
+7. **בדיקת קובץ PDF/טקסט מיוצא:** ל-pdftotext יש בעיה עם חילוץ טקסט עברי מ-PDF-ים של Google Docs (גלישה/היעלמות תווים) - לא אמין לבדיקת תוכן טקסטואלי עברי, רק למבנה/עמודים. **לבדיקה ויזואלית אמיתית** - Poppler (כולל pdftoppm) מותקן דרך `winget install --id oschwartz10612.Poppler --accept-package-agreements --accept-source-agreements -e` (התקנה per-user - אם עוברים למחשב/פרופיל אחר יש להתקין מחדש). הנתיב בפועל הוא `C:\Users\<המשתמש הנוכחי>\AppData\Local\Microsoft\WinGet\Packages\oschwartz10612.Poppler_Microsoft.Winget.Source_8wekyb3d8bbwe\poppler-25.07.0\Library\bin` (יש לאתר עם `find ... -iname "pdftoppm.exe"` כי PATH לא מתעדכן בסשן הנוכחי אחרי ההתקנה) - להשתמש ב-`pdftoppm.exe -png -r 120` כדי להמיר עמודים לתמונות ואז לקרוא אותן עם Read. גם `grep -a -o "/BaseFont */[A-Za-z0-9+_,.-]*"` על קובץ ה-PDF עוזר לבדוק אילו פונטים מוטבעים בפועל (למשל לגלות שרק חלק מהמסמך הומר לפונט הרצוי).
 
 ## התקדמות בפרקי הנוהל (סעיף 1.3)
 
@@ -24,23 +24,23 @@
 
 - 1.3.1 שם הפרויקט, 1.3.2 רקע ומטרות (2.1, 2.2), 1.3.3 סקירת שוק, 1.3.4 חידוש, 1.3.5 דרישות (5.1+5.2), 1.3.6 בעיות ופתרונות (6.1+6.4), 1.3.7 פתרון טכנולוגי (7.1–7.9 מלא), 1.3.8 מבני נתונים (8.1–8.3), 1.3.9 תרשימים (9.1 Use Case, 9.2 Sequence Diagram, 9.3 Data Flow) - כולם עם תמונות בפועל במסמך.
 - 1.3.10 מרכיב אלגוריתמי - **10.1 מנוסח כ"אין אלגוריתם מורכב, המנגנון היחיד כבר מתואר בסעיף 8.3"** (במקום לחזור על תיאור הטרנזקציה פעמיים). 10.2 מתאר את יומן ה-StockMovement כתשתית לניתוח היסטורי, בלי לטעון ש-reconcile "בשימוש פעיל" (כי הוא endpoint לא מחובר מהלקוח בפועל).
-- 1.3.11 אבטחת מידע - מבוסס על קוד authController/authMiddleware בפועל (bcrypt 10 סיבובים, JWT 30 יום, middleware על `/api/*` ו-`/auth/me`, CORS, ProtectedRoute בלקוח כהגנת UX בלבד).
+- 1.3.11 אבטחת מידע - מבוסס על קוד authController/authMiddleware בפועל (bcrypt 10 סיבובים, JWT 30 יום, middleware על `/api/*` ו-`/auth/me`, CORS, ProtectedRoute בלקוח כהגנת UX בלבד). **חסר עדיין בסעיף 11.1 (נכון ל-2026-08-25): בולט על אכיפת role (requireAdmin)** - הוכן טקסט מוכן להעתקה בשיחה, לא ידוע אם הודבק בפועל למסמך - לבדוק בייצוא הבא.
 - 1.3.12 משאבים - סטודנט יחיד, 300+ שעות, מחשב Intel i5 16GB RAM Win11, VS Code/Git/MongoDB Compass/Postman, ידע קודם מהלימודים (בלי טכנולוגיה חדשה מהיסוד).
 - 1.3.13 תוכנית עבודה - טבלת Gantt דחוסה ל-3.5-4 חודשים (מאי→אוגוסט 2026), 7 שלבים עם חפיפות.
-- 1.3.14 בדיקות - 14.1 בדיקות תהליכיות מקובצות לפי פעולה (הרשמה/התחברות/הוצאת-הכנסת סחורה/גישה לנתיבים מוגנים), 14.2 בדיקות יחידה לפי מודול (recordStockMovement, authMiddleware, bcrypt) - כולם מבוססים על ולידציות אמיתיות בקוד.
+- 1.3.14 בדיקות - 14.1 בדיקות תהליכיות מקובצות לפי פעולה (הרשמה/התחברות/הוצאת-הכנסת סחורה/גישה לנתיבים מוגנים/**הרשאות ניהול מוצר - שורה נוספה בפועל ב-2026-08-25**, בדיקה 1: role=user מנסה להוסיף/לערוך/למחוק מוצר → 403), 14.2 בדיקות יחידה לפי מודול (recordStockMovement, authMiddleware, bcrypt) - כולם מבוססים על ולידציות אמיתיות בקוד.
 - 1.3.15 בקרת גרסאות - Git מקומי + GitHub remote (`github.com/sraya8583/SmartStock`, branch `main`), בלי טענת "עבודת צוות בפועל" (המשתמש עובד לבד).
 
 **נותר לתקן (פורמט בלבד, לא תוכן):**
 - טבלת 14.2 (בדיקות יחידה) נשברת באמצע שורה בין עמוד 11 ל-12 בייצוא ה-PDF (נבדק ויזואלית) - המשתמש קיבל הנחיה להוסיף שבירת עמוד (Insert → Break → Page break) לפני הטבלה. לא ידוע אם תוקן בפועל - לבדוק בפעם הבאה שיש ייצוא חדש.
 - כדאי לוודא שורת "מגמה/מסלול" מפורשת בכריכה (הכריכה כרגע מציגה "מגמה: הנדסאי תוכנה" - כנראה מספיק, אבל המשתמש לא אישר מול הנוהל/מנחה במפורש).
 
-## משימות ממתינות למימוש בקוד (המשתמש בחר לדחות לאחר סיום הספר, לפני ההגשה בפועל)
+## משימות שהיו ממתינות למימוש בקוד - נסגרו בפועל ב-2026-08-25
 
-1. **אכיפת הרשאות לפי role.** עדיין תצוגה בלבד. `authController.js` תוקן בינתיים (הוסר באג `const role = email === "user"`, עכשיו `const role = "user"` קבוע - כל משתמש חדש הוא "user"; "admin" נקבע רק ידנית ב-DB, אין נתיב self-service). **עדיין אין שום אכיפה** לא ב-routes/controllers ולא ב-UI. המשתמש אישר במפורש: רק admin יוסיף/יערוך/ימחק מוצר; user רגיל רק תנועות מלאי. פרקים 2, 5.2 בספר כבר מתארים את זה כפונקציונלי - **חובה לסגור לפני ההגשה** או לעדכן את הפרקים.
+שני הפערים שתועדו כאן בעבר **מומשו בקוד** (המשתמש עדכן, ואומת ע"י Claude ב-2026-08-25):
 
-2. **שילוב Brevo** (התראת מלאי נמוך + forgot-password עם טוקן זמני) - נבדק שוב (2026-08-25): אין שום קוד קשור ל-Brevo/email בשרת. TODO עדיין קיים ב-`recordStockMovement`. פרק 7.8 בספר מתאר את זה כקיים. **חובה לסגור לפני ההגשה** או לעדכן את הפרק.
+1. **אכיפת הרשאות לפי role - מומש.** `requireAdmin` middleware חדש (`server/middleware/requireAdmin.js`) - בודק role טרי מה-DB (לא סומך על הטוקן), מותקן על POST/PUT/DELETE של `/api/products` (`server/routes/productRoutes.js:23-26`), מחזיר 403 למי שאינו admin. גם בלקוח הכפתורים מוסתרים למי שאינו admin (`ProductsPage.jsx:22,70`, לפי `profile.role` מ-`/auth/me`). הספר (5.2, 8.1, 9.1) כבר תיאר את זה נכון מראש; **התווסף עכשיו גם בולט ייעודי לסעיף 11.1 (אבטחה) ושורה לטבלת 14.1 (בדיקות)** - ראו הערות ליד 1.3.11/1.3.14 למעלה לגבי מה עוד צריך לוודא שהודבק בפועל למסמך.
 
-המשתמש מודע לשני הפערים הללו ובחר לטפל בהם בהמשך (לא כרגע) - זו החלטה מודעת, לא משהו לדחוף עליו.
+2. **שילוב Brevo - מומש במלואו.** `server/utils/emailService.js` שולח בפועל דרך Brevo API (`BREVO_API_KEY`, `SENDER_EMAIL`). שני שימושים: (א) התראת מלאי נמוך - `productController.js` שולח לכל ה-admins כשתנועת החוצה מורידה את `currentStock` מתחת ל-`lowStockThreshold`. (ב) forgot-password - `authController.js` (`forgotPassword`/`resetPassword`) עם טוקן חד-פעמי (`crypto.randomBytes`) שתוקפו שעה. פרק 7.8 בספר כבר תיאר את זה נכון מראש ובדיוק - **אין צורך בשום שינוי בפרק הזה**.
 
 ## עובדות אמיתיות שנקבעו על SmartStock (לבסס עליהן תוכן, לא להמציא)
 
@@ -50,7 +50,8 @@
 - **מודלים:** User (username, email, סיסמה מוצפנת bcrypt, role: admin/user, ברירת מחדל user), Product (שם, קטגוריה, מחיר, currentStock, lowStockThreshold), StockMovement (יומן immutable: productId, performedBy, type, quantity, resultingBalance, date).
 - **הפונקציה המרכזית:** `recordStockMovement` (`server/controllers/productController.js:70-117`) - טרנזקציית MongoDB (`session.withTransaction`): קריאת מלאי → חישוב יתרה → בדיקת "אין מספיק מלאי" (newBalance<0 → 400) → כתיבת StockMovement → עדכון currentStock. מונע race condition בין עדכונים מקבילים על אותו מוצר.
 - **`/reconcile` endpoint** (`server/routes/productRoutes.js:31`) - קיים בשרת, עושה aggregation ($sum) להשוואת סכום תנועות מול currentStock, **אבל לא מחובר משום מקום בלקוח** - endpoint מת בפועל, לא לתאר אותו כ"בשימוש".
-- **Auth בפועל (מאומת 2026-08-25):** bcrypt (10 salt rounds) להצפנת סיסמה, JWT (30 יום תוקף) ל-authentication, `authMiddleware` מגן על כל `/api/*` ו-`/auth/me`. טוקן נשמר ב-localStorage בלקוח, ProtectedRoute (`react-router-dom`) חוסם ניווט ללא טוקן (הגנת UX בלבד, לא אבטחה אמיתית). CORS מוגבל ל-localhost:5173/5174. **אין עדיין אכיפת role** (ראה משימות ממתינות).
+- **Auth בפועל (מאומת 2026-08-25):** bcrypt (10 salt rounds) להצפנת סיסמה, JWT (30 יום תוקף) ל-authentication, `authMiddleware` מגן על כל `/api/*` ו-`/auth/me`. טוקן נשמר ב-localStorage בלקוח, ProtectedRoute (`react-router-dom`) חוסם ניווט ללא טוקן (הגנת UX בלבד, לא אבטחה אמיתית). CORS מוגבל ל-localhost:5173/5174. **אכיפת role מומשת** - `requireAdmin` middleware על יצירה/עריכה/מחיקה של מוצר (403 למי שאינו admin), גם מוסתר בלקוח. **Brevo מומש** - התראת מלאי נמוך + forgot-password (ראו סעיף "משימות שהיו ממתינות").
+- **כפתור מחיקת חשבון הוסר מה-UI בלבד** (commit `cfa2b64`, 2026-08-25, "drop account deletion") - ה-endpoint `DELETE /auth/me`/`deleteMe` עדיין קיים בשרת (`authController.js:85`, `authRoutes.js:14`) ועובד, רק UserProfileModal כבר לא חושף כפתור לזה. אם הספר מתאר מחיקת חשבון כפיצ'ר בלקוח - לציין שזה קיים בשרת אך לא נגיש מה-UI כרגע.
 - **רספונסיביות:** עדיין אין אף `@media` query בלקוח (לא בוצע).
 - **npm packages בפועל:** Server - bcrypt, cors, dotenv, express, jsonwebtoken, mongoose, nodemon (dev). Client - react, react-dom, react-router-dom, vite/eslint (dev).
 - **Git/GitHub:** repo מחובר ל-`https://github.com/sraya8583/SmartStock.git` (origin), branch יחיד `main`. עבודה ביחיד, לא צוות.
@@ -62,4 +63,4 @@
 שלוש הדיאגרמות (טופולוגיה 7.1, Use Case 9.1, Sequence Diagram 9.2, Data Flow 9.3) קיימות כתמונות בפועל ב-PDF שיוצא ואומתו ויזואלית מול הקוד. אין צורך ליצור מחדש אלא אם המשתמש מבקש שינוי.
 
 ---
-*מסמך זה עודכן ב-2026-08-25 על ידי Claude, לאחר השלמת כל 15 פרקי הספר. לסנכרון בין שיחות/מחשבים.*
+*מסמך זה עודכן ב-2026-08-25 על ידי Claude - לאחר השלמת כל 15 פרקי הספר, ואחרי שהמשתמש מימש בקוד את אכיפת ה-role ואת שילוב Brevo (שני הפערים שתועדו כאן בעבר). לסנכרון בין שיחות/מחשבים.*
