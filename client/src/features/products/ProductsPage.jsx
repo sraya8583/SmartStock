@@ -1,6 +1,7 @@
 import { useState } from "react";
 import useProducts from "../../hooks/products/useProducts";
 import useDeleteProduct from "../../hooks/products/useDeleteProduct";
+import useProfile from "../../hooks/auth/useProfile";
 import ProductGrid from "./ProductGrid";
 import AddProductModal from "./AddProductModal";
 import EditProductModal from "./EditProductModal";
@@ -9,6 +10,7 @@ import MovementHistoryModal from "./history/MovementHistoryModal";
 import AllMovementsModal from "./history/AllMovementsModal";
 import UserProfileModal from "../auth/UserProfileModal";
 import Button from "../../ui/Button";
+import logo from "../../assets/logo.png";
 import "./css/ProductsPage.css";
 
 // דף ראשי של ניהול המלאי
@@ -16,6 +18,8 @@ import "./css/ProductsPage.css";
 function ProductsPage() {
   const { data, isLoading, error, refetch } = useProducts();
   const { removeProduct } = useDeleteProduct();
+  const { profile } = useProfile();
+  const isAdmin = profile?.role === "admin";
 
   // showAdd — האם מודאל ההוספה פתוח
   const [showAdd, setShowAdd] = useState(false);
@@ -63,7 +67,10 @@ function ProductsPage() {
             </button>
             <Button label="היסטוריה כללית" variant="neutral" onClick={() => setShowAllMovements(true)} />
             <Button label="עדכון מלאי" variant="success" onClick={() => setShowStockUpdate(true)} />
-            <Button label="+ הוסף מוצר" variant="primary" onClick={() => setShowAdd(true)} />
+            {isAdmin && (
+              <Button label="+ הוסף מוצר" variant="primary" onClick={() => setShowAdd(true)} />
+            )}
+            <img src={logo} alt="SmartStock" className="products-page__logo" />
           </div>
         </div>
 

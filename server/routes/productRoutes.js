@@ -10,6 +10,7 @@ const {
   reconcileProduct,
 } = require("../controllers/productController");
 const authMiddleware = require("../middleware/authMiddleware");
+const requireAdmin = require("../middleware/requireAdmin");
 
 const router = express.Router();
 
@@ -18,10 +19,11 @@ const router = express.Router();
 // (הראוטר הזה מחובר ב-app.js בלי prefix, לפני auth routes)
 router.use("/api", authMiddleware);
 
-router.post("/api/products", createProduct);
-router.put("/api/products/:id", updateProduct);
+// הוספה/עריכה/מחיקה של מוצר מותרות רק ל-admin; משתמש רגיל עדיין יכול לצפות ולרשום תנועות מלאי
+router.post("/api/products", requireAdmin, createProduct);
+router.put("/api/products/:id", requireAdmin, updateProduct);
 router.get("/api/products", getProducts);
-router.delete("/api/products/:id", deleteProduct);
+router.delete("/api/products/:id", requireAdmin, deleteProduct);
 
 // היסטוריה כללית של תנועות המלאי של כל המוצרים יחד
 router.get("/api/movements", getAllMovements);
