@@ -62,3 +62,21 @@
   color: #6b7280;
   margin: 0;
 }
+
+.auth-form__success {
+  color: #16a34a;
+  font-size: 0.875rem;
+  text-align: center;
+  margin: 0;
+}
+
+.auth-form__forgot-link {
+  align-self: flex-end;
+  font-size: 0.8125rem;
+  color: #6b7280;
+  text-decoration: none;
+}
+
+.auth-form__forgot-link:hover {
+  text-decoration: underline;
+}

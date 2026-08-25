@@ -6,6 +6,8 @@ const userSchema = new mongoose.Schema(
     password: { type: String, required: true },
     role: { type: String, enum: ["admin", "user"], default: "user" },
     username: { type: String },
+    resetPasswordToken: { type: String }, // טוקן זמני לאיפוס סיסמה
+    resetPasswordExpires: { type: Date }, // מועד תפוגה של הטוקן
   },
   { timestamps: true } // מוסיף אוטומטית createdAt (תאריך הרשמה) ו-updatedAt
 );

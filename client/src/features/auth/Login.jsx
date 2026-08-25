@@ -47,6 +47,10 @@ function Login() {
           />
         </label>
 
+        <Link to="/forgot-password" className="auth-form__forgot-link">
+          שכחתי סיסמה
+        </Link>
+
         <Button
           label={isLoading ? "מתחבר..." : "התחבר"}
           type="submit"
