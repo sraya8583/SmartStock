@@ -21,6 +21,11 @@
   gap: 1rem;
 }
 
+.auth-form__logo {
+  height: 2.25rem;
+  align-self: center;
+}
+
 .auth-form__title {
   font-size: 1.5rem;
   font-weight: 700;

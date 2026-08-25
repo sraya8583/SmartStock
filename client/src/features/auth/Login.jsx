@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import useLogin from "../../hooks/auth/useLogin";
 import Button from "../../ui/Button";
 import PasswordInput from "../../ui/PasswordInput";
+import logo from "../../assets/logoText.png";
 import "./css/Auth.css";
 
 // דף התחברות - email + password. בהצלחה שומר טוקן ועובר לדף הבית
@@ -24,6 +25,7 @@ function Login() {
   return (
     <div className="auth-page">
       <form className="auth-form" onSubmit={handleSubmit}>
+        <img src={logo} alt="SmartStock" className="auth-form__logo" />
         <h1 className="auth-form__title">התחברות</h1>
 
         {error && <p className="auth-form__error">{error}</p>}
