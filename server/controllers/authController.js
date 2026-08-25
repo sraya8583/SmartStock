@@ -2,26 +2,11 @@
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 const User = require("../models/User");
+const sendEmail = require("../utils/emailService");
+const resetPasswordEmailHtml = require("../utils/resetPasswordEmail");
 
 const SALT_ROUNDS = 10;
 const RESET_TOKEN_EXPIRES_MS = 60 * 60 * 1000; // שעה
-
-// שולחת מייל דרך Brevo API (בקשת HTTP ישירה, בלי SDK נוסף)
-async function sendResetEmail(email, resetLink) {
-  await fetch("https://api.brevo.com/v3/smtp/email", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "api-key": process.env.BREVO_API_KEY,
-    },
-    body: JSON.stringify({
-      sender: { email: process.env.SENDER_EMAIL },
-      to: [{ email }],
-      subject: "איפוס סיסמה - SmartStock",
-      htmlContent: `<p>לאיפוס הסיסמה יש ללחוץ על הקישור הבא:</p><p><a href="${resetLink}">${resetLink}</a></p><p>הקישור תקף לשעה אחת.</p>`,
-    }),
-  });
-}
 
 // מייצרת טוקן (JWT) עבור משתמש - משמש גם ברישום וגם בהתחברות
 function generateToken(user) {
@@ -125,7 +110,7 @@ const forgotPassword = async (req, res) => {
 
       const clientUrl = process.env.CLIENT_URL || "http://localhost:5173";
       const resetLink = `${clientUrl}/reset-password/${resetToken}`;
-      await sendResetEmail(user.email, resetLink);
+      await sendEmail(user.email, "איפוס סיסמה - SmartStock", resetPasswordEmailHtml(resetLink));
     }
 
     res.status(200).json({ message: "אם קיים משתמש עם אימייל זה, נשלח אליו קישור לאיפוס סיסמה" });
