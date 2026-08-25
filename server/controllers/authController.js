@@ -28,8 +28,7 @@ const register = async (req, res) => {
       return res.status(400).json({ message: "משתמש עם אימייל זה כבר קיים" });
     }
 
-    // המשתמש i0548542122@gmail.com הוא בעלco הפרויקט - נרשם כ-admin, כל השאר כ-user רגיל
-    const role = email === "user";
+    const role = "user";
 
     const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
     const newUser = await User.create({ email, password: hashedPassword, role, username: req.body.username });

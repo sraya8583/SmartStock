@@ -15,10 +15,13 @@ cd server && npm start     # production
 
 **Server:** Node.js + Express + MongoDB (Mongoose). Routes → Controllers → Models pattern.
 
-- `GET/POST /api/products`, `PATCH/DELETE /api/products/:id`
-- `POST /auth/register`, `POST /auth/login`
+- `GET/POST /api/products`, `PUT/DELETE /api/products/:id`
+- `POST /api/products/:id/movement`, `GET /api/products/:id/movements`, `GET /api/movements`, `GET /api/products/:id/reconcile`
+- `POST /auth/register`, `POST /auth/login`, `GET/DELETE /auth/me`
 
-**Known gaps:** passwords stored in plaintext, no auth middleware on product routes, no JWT/sessions.
+**Auth (implemented):** passwords hashed with bcrypt, JWT issued on register/login, `authMiddleware` guards all `/api/*` routes and `/auth/me`. New users always get `role: "user"` — `admin` is only ever set manually in the DB, no self-service path.
+
+**Known gap:** no role-based authorization — any authenticated user can currently create/edit/delete products. Pending: only `admin` should be able to add/edit/delete a product; a regular `user` should only be able to record stock movements (in/out) on existing products. Needs enforcement both server-side (route/controller guard) and client-side (hide/disable UI).
 
 **Client:** React (Vite), plain CSS — no Tailwind, no CSS-in-JS. Organized by feature:
 
