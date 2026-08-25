@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import useForgotPassword from "../../hooks/auth/useForgotPassword";
 import Button from "../../ui/Button";
+import logo from "../../assets/logoText.png";
 import "./css/Auth.css";
 
 // דף "שכחתי סיסמה" - מזינים אימייל ומקבלים מייל עם קישור לאיפוס
@@ -22,6 +23,7 @@ function ForgotPassword() {
   return (
     <div className="auth-page">
       <form className="auth-form" onSubmit={handleSubmit}>
+        <img src={logo} alt="SmartStock" className="auth-form__logo" />
         <h1 className="auth-form__title">שכחתי סיסמה</h1>
 
         {error && <p className="auth-form__error">{error}</p>}

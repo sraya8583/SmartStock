@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import useSignup from "../../hooks/auth/useSignup";
 import Button from "../../ui/Button";
 import PasswordInput from "../../ui/PasswordInput";
+import logo from "../../assets/logoText.png";
 import "./css/Auth.css";
 
 // דף הרשמה - יצירת משתמש חדש עם email + password. בהצלחה שומר טוקן ועובר לדף הבית
@@ -33,6 +34,7 @@ function Signup() {
   return (
     <div className="auth-page">
       <form className="auth-form" onSubmit={handleSubmit}>
+        <img src={logo} alt="SmartStock" className="auth-form__logo" />
         <h1 className="auth-form__title">הרשמה</h1>
 
         {(formError || error) && (
