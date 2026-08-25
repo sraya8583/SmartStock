@@ -10,7 +10,8 @@ export async function fetchProductMovements(productId) {
   });
 
   if (!response.ok) {
-    throw new Error("שגיאה בשליפת היסטוריית המלאי");
+    const data = await response.json().catch(() => ({}));
+    throw new Error(data.message || "שגיאה בשליפת היסטוריית המלאי");
   }
 
   return response.json();
@@ -20,7 +21,8 @@ export async function fetchProductMovements(productId) {
 export async function fetchAllMovements() {
   const response = await fetch(MOVEMENTS_URL, { headers: getAuthHeaders() });
   if (!response.ok) {
-    throw new Error("שגיאה בשליפת היסטוריית המלאי");
+    const data = await response.json().catch(() => ({}));
+    throw new Error(data.message || "שגיאה בשליפת היסטוריית המלאי");
   }
 
   return response.json();

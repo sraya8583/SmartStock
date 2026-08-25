@@ -7,7 +7,8 @@ export async function fetchProducts() {
   const response = await fetch(API_URL, { headers: getAuthHeaders() });
 
   if (!response.ok) {
-    throw new Error("שגיאה בשליפת המוצרים מהשרת");
+    const data = await response.json().catch(() => ({}));
+    throw new Error(data.message || "שגיאה בשליפת המוצרים מהשרת");
   }
 
   return response.json();
@@ -22,7 +23,8 @@ export async function createProduct(productData) {
   });
 
   if (!response.ok) {
-    throw new Error("שגיאה בהוספת המוצר");
+    const data = await response.json().catch(() => ({}));
+    throw new Error(data.message || "שגיאה בהוספת המוצר");
   }
 
   return response.json();
@@ -37,7 +39,8 @@ export async function updateProduct(id, updates) {
   });
 
   if (!response.ok) {
-    throw new Error("שגיאה בעדכון המוצר");
+    const data = await response.json().catch(() => ({}));
+    throw new Error(data.message || "שגיאה בעדכון המוצר");
   }
 
   return response.json();
@@ -51,7 +54,8 @@ export async function deleteProduct(id) {
   });
 
   if (!response.ok) {
-    throw new Error("שגיאה במחיקת המוצר");
+    const data = await response.json().catch(() => ({}));
+    throw new Error(data.message || "שגיאה במחיקת המוצר");
   }
 }
 
