@@ -29,12 +29,16 @@
   margin-bottom: 1rem;
 }
 
-/* תגיות סינון לפי מוצר */
+/* תגיות סינון לפי מוצר - גובה מוגבל עם גלילה, כדי שברשימת מוצרים גדולה התגיות לא ידחקו את ההיסטוריה עצמה */
 .filter-tags {
   display: flex;
   flex-wrap: wrap;
+  align-content: flex-start;
   gap: 0.5rem;
   margin-bottom: 1rem;
+  max-height: 5rem;
+  overflow-y: auto;
+  flex-shrink: 0;
 }
 
 .filter-tag {
@@ -67,74 +71,6 @@
 }
 
 .empty-message {
-  color: #6b7280;
-}
-
-.movement-table-wrapper {
-  overflow-y: auto;
-  overflow-x: auto;
-}
-
-.movement-table {
-  width: 100%;
-  font-size: 0.875rem;
-  text-align: right;
-}
-
-.movement-table thead {
-  background-color: #f3f4f6;
-  color: #4b5563;
-  text-transform: uppercase;
-  font-size: 0.75rem;
-  position: sticky;
-  top: 0;
-}
-
-.movement-table th,
-.movement-table td {
-  padding: 0.5rem 0.75rem;
-}
-
-.movement-table tbody tr {
-  border-top: 1px solid #e5e7eb;
-}
-
-.movement-table__date {
-  color: #6b7280;
-  white-space: nowrap;
-}
-
-.movement-table__product {
-  color: #1f2937;
-  white-space: nowrap;
-}
-
-.movement-table__product-sku {
-  color: #9ca3af;
-}
-
-.movement-table__type {
-  color: #374151;
-  white-space: nowrap;
-}
-
-.movement-table__quantity {
-  font-weight: 500;
-}
-
-.movement-table__quantity--negative {
-  color: #dc2626;
-}
-
-.movement-table__quantity--positive {
-  color: #16a34a;
-}
-
-.movement-table__balance {
-  color: #1f2937;
-}
-
-.movement-table__note {
   color: #6b7280;
 }
 

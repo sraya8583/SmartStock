@@ -164,7 +164,7 @@ const getMovements = async (req, res) => {
   try {
     const movements = await StockMovement.find({ productId: req.params.id })
       .sort({ date: -1 })
-      .populate("performedBy", "email");
+      .populate("performedBy", "email username");
     res.status(200).json(movements);
   } catch (error) {
     res.status(500).json({ message: "Failed to fetch stock movements" });

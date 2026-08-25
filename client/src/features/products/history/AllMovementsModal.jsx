@@ -1,6 +1,6 @@
 import { useState } from "react";
 import useAllMovements from "../../../hooks/products/useAllMovements";
-import movementTypeLabels from "./movementTypeLabels";
+import MovementCard from "./MovementCard";
 import Button from "../../../ui/Button";
 import "./css/AllMovementsModal.css";
 
@@ -10,7 +10,6 @@ import "./css/AllMovementsModal.css";
 // props: products (מערך המוצרים - לבניית תגיות הסינון), onClose
 function AllMovementsModal({ products, onClose }) {
   const { data: movements, isLoading, error } = useAllMovements();
-console.log("movements: ",movements);
 
   // selectedProductIds - מזהי המוצרים שנבחרו לסינון. מערך ריק = מציגים הכל
   const [selectedProductIds, setSelectedProductIds] = useState([]);
@@ -60,47 +59,10 @@ console.log("movements: ",movements);
         )}
 
         {!isLoading && !error && filteredMovements.length > 0 && (
-          <div className="movement-table-wrapper">
-            <table className="movement-table">
-              <thead>
-                <tr>
-                  <th>תאריך</th>
-                  <th>מוצר</th>
-                  <th>סוג</th>
-                  <th>כמות</th>
-                  <th>יתרה אחרי</th>
-                  <th>בוצע על ידי</th>
-                  <th>הערה</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredMovements.map((movement) => (
-                  <tr key={movement._id}>
-                    <td className="movement-table__date">
-                      {new Date(movement.date).toLocaleString("he-IL")}
-                    </td>
-                    <td className="movement-table__product">
-                      {/* productId הגיע populated מהשרת - אובייקט עם name/sku, לא סתם מזהה */}
-                      {movement.productId?.name ?? "מוצר נמחק"}
-                      <span className="movement-table__product-sku"> ({movement.productId?.sku ?? "—"})</span>
-                    </td>
-                    <td className="movement-table__type">
-                      {movementTypeLabels[movement.type] ?? movement.type}
-                    </td>
-                    <td
-                      className={`movement-table__quantity ${
-                        movement.quantity < 0 ? "movement-table__quantity--negative" : "movement-table__quantity--positive"
-                      }`}
-                    >
-                      {movement.quantity > 0 ? `+${movement.quantity}` : movement.quantity}
-                    </td>
-                    <td className="movement-table__balance">{movement.resultingBalance}</td>
-                    <td className="movement-table__performed-by">{movement.performedBy?.email ?? "—"}</td>
-                    <td className="movement-table__note">{movement.note || "—"}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="movement-list">
+            {filteredMovements.map((movement) => (
+              <MovementCard key={movement._id} movement={movement} showProduct />
+            ))}
           </div>
         )}
 

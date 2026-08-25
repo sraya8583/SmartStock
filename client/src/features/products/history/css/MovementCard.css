@@ -1,0 +1,62 @@
+/* עיצוב לקובץ MovementCard - משותף להיסטוריה הכללית ולהיסטוריה פר-מוצר */
+
+.movement-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  overflow-y: auto;
+  flex: 1;
+  min-height: 0;
+}
+
+.movement-card {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 0.875rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+}
+
+.movement-card__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  min-width: 6rem;
+}
+
+.movement-card__field--note {
+  flex: 1 1 10rem;
+}
+
+.movement-card__label {
+  font-size: 0.6875rem;
+  color: #9ca3af;
+}
+
+.movement-card__value {
+  color: #1f2937;
+  white-space: nowrap;
+}
+
+.movement-card__field--note .movement-card__value {
+  white-space: normal;
+  color: #6b7280;
+}
+
+.movement-card__product-sku {
+  color: #9ca3af;
+}
+
+.movement-card__quantity {
+  font-weight: 600;
+}
+
+.movement-card__quantity--negative {
+  color: #dc2626;
+}
+
+.movement-card__quantity--positive {
+  color: #16a34a;
+}

@@ -1,5 +1,5 @@
 import useMovements from "../../../hooks/products/useMovements";
-import movementTypeLabels from "./movementTypeLabels";
+import MovementCard from "./MovementCard";
 import Button from "../../../ui/Button";
 import "./css/MovementHistoryModal.css";
 
@@ -25,41 +25,10 @@ function MovementHistoryModal({ product, onClose }) {
         )}
 
         {!isLoading && !error && movements.length > 0 && (
-          <div className="movement-table-wrapper">
-            <table className="movement-table">
-              <thead>
-                <tr>
-                  <th>תאריך</th>
-                  <th>סוג</th>
-                  <th>כמות</th>
-                  <th>יתרה אחרי</th>
-                  <th>בוצע על ידי</th>
-                  <th>הערה</th>
-                </tr>
-              </thead>
-              <tbody>
-                {movements.map((movement) => (
-                  <tr key={movement._id}>
-                    <td className="movement-table__date">
-                      {new Date(movement.date).toLocaleString("he-IL")}
-                    </td>
-                    <td className="movement-table__type">
-                      {movementTypeLabels[movement.type] ?? movement.type}
-                    </td>
-                    <td
-                      className={`movement-table__quantity ${
-                        movement.quantity < 0 ? "movement-table__quantity--negative" : "movement-table__quantity--positive"
-                      }`}
-                    >
-                      {movement.quantity > 0 ? `+${movement.quantity}` : movement.quantity}
-                    </td>
-                    <td className="movement-table__balance">{movement.resultingBalance}</td>
-                    <td className="movement-table__performed-by">{movement.performedBy?.email ?? "—"}</td>
-                    <td className="movement-table__note">{movement.note || "—"}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="movement-list">
+            {movements.map((movement) => (
+              <MovementCard key={movement._id} movement={movement} />
+            ))}
           </div>
         )}
 
