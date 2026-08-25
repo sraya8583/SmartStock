@@ -1,34 +1,19 @@
 import { useNavigate } from "react-router-dom";
+import { FiLogOut } from "react-icons/fi";
 import useProfile from "../../hooks/auth/useProfile";
-import useDeleteAccount from "../../hooks/auth/useDeleteAccount";
 import Button from "../../ui/Button";
 import "./css/UserProfileModal.css";
 
-// מודאל פרטי המשתמש - מציג מייל ותאריך הרשמה, ומאפשר יציאה (logout) או מחיקת חשבון
+// מודאל פרטי המשתמש - מציג מייל ותאריך הרשמה, ומאפשר יציאה (logout)
 // props: onClose (סגירת המודאל)
 function UserProfileModal({ onClose }) {
   const { profile, isLoading, error } = useProfile();
-  const { removeAccount, isLoading: isDeleting, error: deleteError } = useDeleteAccount();
   const navigate = useNavigate();
 
   // יציאה מהמערכת - מוחקים את הטוקן מה-localStorage וחוזרים לדף ההתחברות
   const handleLogout = () => {
     localStorage.removeItem("token");
     navigate("/login");
-  };
-
-  // מחיקת חשבון - אחרי אישור, מוחקים את המשתמש בשרת ואז מתנהגים כמו logout
-  const handleDelete = async () => {
-    const confirmed = window.confirm(
-      "האם אתה בטוח שברצונך למחוק את החשבון? הפעולה אינה הפיכה."
-    );
-    if (!confirmed) return;
-
-    const success = await removeAccount();
-    if (success) {
-      localStorage.removeItem("token");
-      navigate("/login");
-    }
   };
 
   return (
@@ -66,20 +51,11 @@ function UserProfileModal({ onClose }) {
           </div>
         )}
 
-        {deleteError && <p className="modal-error">{deleteError}</p>}
-
         <div className="modal-actions">
           <Button
-            label="יציאה"
+            label={<><FiLogOut /> יציאה</>}
             variant="neutral"
             onClick={handleLogout}
-            className="modal-actions__button"
-          />
-          <Button
-            label={isDeleting ? "מוחק..." : "מחיקת חשבון"}
-            variant="danger"
-            onClick={handleDelete}
-            disabled={isDeleting}
             className="modal-actions__button"
           />
         </div>
