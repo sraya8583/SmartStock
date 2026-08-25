@@ -1,6 +1,9 @@
 const mongoose = require("mongoose");
 const Product = require("../models/Product");
 const StockMovement = require("../models/StockMovement");
+const User = require("../models/User");
+const sendEmail = require("../utils/emailService");
+const lowStockEmailHtml = require("../utils/lowStockEmail");
 
 // מחזירה את כל המוצרים עם המלאי הנוכחי שלהם
 const getProducts = async (req, res) => {
@@ -107,8 +110,22 @@ const recordStockMovement = async (productId, type, quantityChange, note, perfor
       updatedProduct = product;
     });
 
-    // TODO: לא מוגדר עדיין - שליחת מייל התראה כשהמלאי יורד מתחת לסף (lowStockThreshold)
-    // תתווסף בשלב הבא כשיהיו פרטי SMTP
+    // בהוצאה מהמלאי (quantityChange שלילי) שמגיעה לסף או מתחתיו - שולחים התראת מייל לכל האדמינים.
+    // לא עוצר את הבקשה אם השליחה נכשלת - עדכון המלאי כבר הצליח והוא העיקר
+    if (quantityChange < 0 && updatedProduct.currentStock <= updatedProduct.lowStockThreshold) {
+      try {
+        const admins = await User.find({ role: "admin" });
+        if (admins.length > 0) {
+          await sendEmail(
+            admins.map((admin) => admin.email),
+            "התראת מלאי נמוך - SmartStock",
+            lowStockEmailHtml(updatedProduct)
+          );
+        }
+      } catch (emailError) {
+        console.error("שליחת מייל התראת מלאי נמוך נכשלה:", emailError);
+      }
+    }
 
     return updatedProduct;
   } finally {
