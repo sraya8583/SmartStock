@@ -10,7 +10,7 @@ async function sendEmail(to, subject, htmlContent) {
       "api-key": process.env.BREVO_API_KEY,
     },
     body: JSON.stringify({
-      sender: { email: process.env.SENDER_EMAIL },
+      sender: { email: process.env.SENDER_EMAIL, name: process.env.SENDER_NAME,},
       to: recipients.map((email) => ({ email })),
       subject,
       htmlContent,
